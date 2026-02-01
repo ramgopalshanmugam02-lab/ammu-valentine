@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For Ammu 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" loop>
+    <source src="music/love.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- SECTION 1 -->
+  <section class="section active" id="section1">
+    <h1>Ammu 💕</h1>
+    <p>I made something special just for you…</p>
+    <button onclick="nextSection()">Tap to continue 💖</button>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section class="section" id="section2">
+    <img id="slideshow" src="images/photo1.jpg" class="photo">
+    <p>You make my world brighter every single day ✨</p>
+    <button onclick="showModal()">One last question… 💘</button>
+  </section>
+
+  <!-- PROPOSAL MODAL -->
+  <div class="modal" id="proposalModal">
+    <div class="modal-content">
+      <h2>Will you be my Valentine, Ammu? 💖</h2>
+
+      <div class="buttons">
+        <button id="yesBtn" onclick="accepted()">YES 💕</button>
+        <button id="noBtn">NO 🙈</button>
+      </div>
+
+      <p id="finalMessage" class="final-text"></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
