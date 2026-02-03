@@ -1,8 +1,16 @@
+/* =========================
+   BASIC SETUP
+========================= */
+
 const sections = document.querySelectorAll(".section");
 let current = 0;
 
 const popup = document.getElementById("popup");
 const popupText = document.getElementById("popupText");
+
+/* =========================
+   QUIZ REACTIONS
+========================= */
 
 const reactions = [
   {
@@ -19,14 +27,25 @@ const reactions = [
   }
 ];
 
+/* =========================
+   SECTION NAVIGATION
+========================= */
+
 function nextSection() {
   sections[current].classList.remove("active");
   current++;
   sections[current].classList.add("active");
 }
 
+/* =========================
+   QUIZ ANSWER HANDLER
+========================= */
+
 function answer(isRight, index) {
-  popupText.innerText = isRight ? reactions[index].right : reactions[index].wrong;
+  popupText.innerText = isRight
+    ? reactions[index].right
+    : reactions[index].wrong;
+
   popup.style.display = "flex";
 }
 
@@ -35,15 +54,30 @@ function closePopup() {
   nextSection();
 }
 
-/* NO BUTTON */
+/* =========================
+   SHOW PROPOSAL MODAL (FIX)
+========================= */
+
+function showModal() {
+  document.getElementById("proposalModal").style.display = "flex";
+}
+
+/* =========================
+   NO BUTTON RUNAWAY
+========================= */
+
 const noBtn = document.getElementById("noBtn");
+
 noBtn.addEventListener("mouseover", () => {
   noBtn.style.position = "absolute";
   noBtn.style.top = Math.random() * 80 + "%";
   noBtn.style.left = Math.random() * 80 + "%";
 });
 
-/* SLIDESHOW */
+/* =========================
+   SLIDESHOW
+========================= */
+
 const photos = [
   "images/photo1.jpg",
   "images/photo2.jpg",
@@ -52,23 +86,45 @@ const photos = [
   "images/photo5.jpg",
   "images/photo6.jpg"
 ];
-let p = 0;
+
+let photoIndex = 0;
 const slideImg = document.getElementById("slideshow");
 
 setInterval(() => {
   if (!slideImg) return;
-  p = (p + 1) % photos.length;
-  slideImg.src = photos[p];
+
+  photoIndex = (photoIndex + 1) % photos.length;
+  slideImg.style.opacity = 0;
+
+  setTimeout(() => {
+    slideImg.src = photos[photoIndex];
+    slideImg.style.opacity = 1;
+  }, 400);
 }, 2500);
 
-/* MUSIC */
-const music = document.getElementById("bgMusic");
-document.addEventListener("click", () => {
-  if (music.paused) music.play().catch(()=>{});
-}, { once: true });
+/* =========================
+   MUSIC AUTOPLAY
+========================= */
 
-/* ACCEPT */
+const music = document.getElementById("bgMusic");
+
+document.addEventListener(
+  "click",
+  () => {
+    if (music && music.paused) {
+      music.play().catch(() => {});
+    }
+  },
+  { once: true }
+);
+
+/* =========================
+   ACCEPTANCE MESSAGE
+========================= */
+
 function accepted() {
   document.getElementById("finalMessage").innerHTML =
-    "YAAAYYY 🥹💖<br><br>Ammu, you just made my heart the happiest ever 💕";
+    "YAAAYYY 🥹💖<br><br>" +
+    "Ammu, you just made my heart the happiest ever 💕<br>" +
+    "Unlimited love, silly fights, and forever starts now 😌❤️";
 }
