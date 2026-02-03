@@ -6,7 +6,7 @@ const quizData = [
   {
     question: "What is my favourite thing about you? 💕",
     options: [
-      "Your smile 😍",
+      "Your love 😍",
       "Your boobies 😜",
       "Your possesiveness 😆"
     ],
