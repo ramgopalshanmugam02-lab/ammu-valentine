@@ -1,10 +1,8 @@
-/* =========================
-   QUIZ DATA (YOUR OLD QUESTIONS)
-========================= */
+/* ===== QUIZ DATA ===== */
 
 const quizData = [
   {
-    question: "What is my favourite thing about you? 💕",
+    q: "What is my favourite thing about you? 💕",
     options: [
       "Your love 😍",
       "Your boobies 😜",
@@ -13,7 +11,7 @@ const quizData = [
     correctIndex: 0
   },
   {
-    question: "What do I do when I miss you? 🥹",
+    q: "What do I do when I miss you? 🥹",
     options: [
       "Act strong 😎",
       "Overthink silently 🙃",
@@ -22,7 +20,7 @@ const quizData = [
     correctIndex: 2
   },
   {
-    question: "Who is officially my favourite person? 💖",
+    q: "Who is officially my favourite person? 💖",
     options: [
       "You 😌❤️",
       "Me 😎",
@@ -32,96 +30,70 @@ const quizData = [
   }
 ];
 
-/* =========================
-   QUIZ ELEMENTS
-========================= */
-
 let currentQuestion = 0;
 
 const quizBox = document.getElementById("quizBox");
 const questionEl = document.getElementById("question");
 const optionsBox = document.getElementById("options");
+const popup = document.getElementById("popup");
+const popupText = document.getElementById("popupText");
+const music = document.getElementById("bgMusic");
 
-/* =========================
-   LOAD QUESTION
-========================= */
+/* ===== LOAD QUESTION ===== */
 
 function loadQuestion() {
   const q = quizData[currentQuestion];
-  questionEl.innerText = q.question;
+  questionEl.innerText = q.q;
   optionsBox.innerHTML = "";
 
-  q.options.forEach((option, index) => {
+  q.options.forEach((opt, index) => {
     const btn = document.createElement("button");
-    btn.innerText = option;
+    btn.innerText = opt;
     btn.onclick = () => handleAnswer(index === q.correctIndex);
     optionsBox.appendChild(btn);
   });
 }
 
-/* =========================
-   HANDLE ANSWER
-========================= */
+/* ===== POPUP ===== */
 
-function handleAnswer(isCorrect) {
-  if (isCorrect) {
-    alert("Correct 😘 you really know me too well!");
-  } else {
-    alert("Wrong 😤 hmm… still cute though 😂❤️");
-  }
-
-  currentQuestion++;
-
-  if (currentQuestion < quizData.length) {
-    loadQuestion();
-  } else {
-    quizBox.classList.add("hidden");
-    document.getElementById("slideshow").classList.remove("hidden");
-
-    const music = document.getElementById("bgMusic");
-    if (music) music.play().catch(() => {});
-  }
+function showPopup(text) {
+  popupText.innerText = text;
+  popup.classList.remove("hidden");
+  setTimeout(() => popup.classList.add("hidden"), 1500);
 }
 
-/* =========================
-   START QUIZ
-========================= */
+/* ===== HANDLE ANSWER ===== */
+
+function handleAnswer(correct) {
+  if (correct) {
+    showPopup("Correct 😘 you really know me too well!");
+  } else {
+    showPopup("Wrong 😤 extra cuddles punishment 😂❤️");
+  }
+
+  setTimeout(() => {
+    currentQuestion++;
+    if (currentQuestion < quizData.length) {
+      loadQuestion();
+    } else {
+      quizBox.classList.add("hidden");
+      document.getElementById("slideshow").classList.remove("hidden");
+      music.play().catch(() => {});
+    }
+  }, 1600);
+}
+
+/* ===== YES / NO ===== */
+
+document.getElementById("yesBtn").onclick = () => {
+  showPopup("YAYYY 🧸💖 I knew it!!");
+  document.querySelector(".btn-group").classList.add("hidden");
+};
+
+document.getElementById("noBtn").onclick = () => {
+  showPopup("NO is not an option 😏💕");
+};
+
+/* ===== START ===== */
 
 loadQuestion();
-
-/* =========================
-   SLIDESHOW
-========================= */
-
-const images = [
-  "images/photo1.jpg",
-  "images/photo2.jpg",
-  "images/photo3.jpg",
-  "images/photo4.jpg",
-  "images/photo5.jpg",
-  "images/photo6.jpg"
-];
-
-let imgIndex = 0;
-const slideImg = document.getElementById("slideImage");
-
-setInterval(() => {
-  imgIndex = (imgIndex + 1) % images.length;
-  slideImg.src = images[imgIndex];
-}, 2500);
-
-/* =========================
-   YES / NO BUTTONS
-========================= */
-
-function yesClicked() {
-  document.getElementById("choiceButtons").style.display = "none";
-  document.getElementById("proposalModal").style.display = "flex";
-}
-
-function noClicked() {
-  const btn = document.getElementById("noBtn");
-  btn.style.position = "absolute";
-  btn.style.left = Math.random() * 80 + "%";
-  btn.style.top = Math.random() * 80 + "%";
-}

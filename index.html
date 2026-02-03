@@ -1,45 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Ammu ❤️</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <!-- QUIZ -->
 <div id="quizBox" class="card">
-  <h2 id="question">Question</h2>
+  <h2 id="question"></h2>
   <div id="options"></div>
 </div>
 
 <!-- SLIDESHOW -->
 <div id="slideshow" class="hidden">
-  <img id="slideImage" src="images/photo1.jpg">
-  <p class="cute-text">Every moment with you feels like magic ✨</p>
+  <div class="heart-gallery">
+    <img src="images/photo1.jpg">
+    <img src="images/photo2.jpg">
+    <img src="images/photo3.jpg">
+    <img src="images/photo4.jpg">
+    <img src="images/photo5.jpg">
+    <img src="images/photo6.jpg">
+  </div>
 
-  <div id="choiceButtons">
-    <button onclick="yesClicked()">YES 💖</button>
-    <button id="noBtn" onclick="noClicked()">NO 😈</button>
+  <h2 class="question-text">Will you be my Valentine, Ammu? 💖</h2>
+
+  <div class="btn-group">
+    <button id="yesBtn">YES 💕</button>
+    <button id="noBtn">NO 😜</button>
   </div>
 </div>
 
-<!-- FINAL MODAL -->
-<div id="proposalModal" class="modal">
-  <div class="modal-content">
-    <img src="images/teddy.png" class="teddy-img" alt="Teddy Love">
-    <h2>Ammu 🥹❤️</h2>
-    <p>
-      You make my days brighter, my heart calmer and my life happier.  
-      Will you be my Valentine? 💘
-    </p>
-  </div>
+<!-- POPUP -->
+<div id="popup" class="popup hidden">
+  <img id="popupImg" src="images/teddy.png" class="popup-img">
+  <p id="popupText"></p>
 </div>
 
-<audio id="bgMusic" src="music/love.mp3"></audio>
+<!-- MUSIC -->
+<audio id="bgMusic" src="music/vazhi-thunaiye.mp3" loop></audio>
 
-<script src="script.js?v=6"></script>
+<script src="script.js?v=7"></script>
 </body>
 </html>
