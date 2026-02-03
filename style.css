@@ -1,88 +1,73 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
-}
-
 body {
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
-  color: white;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
   height: 100vh;
-  overflow: hidden;
-}
-
-.section {
-  display: none;
-  height: 100vh;
-  text-align: center;
-  padding: 40px 20px;
+  display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
 }
 
-.section.active {
-  display: flex;
-}
-
-h1, h2 {
-  margin-bottom: 25px;
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
 }
 
 button {
-  padding: 12px 24px;
-  margin: 10px;
+  padding: 10px 18px;
+  margin: 8px;
   border: none;
-  border-radius: 30px;
-  background: white;
-  color: #ff4f8b;
-  cursor: pointer;
-  font-size: 1rem;
-}
-
-.photo {
-  width: 240px;
-  height: 240px;
-  object-fit: cover;
-  border-radius: 25px;
-  margin-bottom: 20px;
-}
-
-/* POPUP */
-.popup {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-}
-
-.popup-box {
-  background: white;
-  color: #ff4f8b;
-  padding: 25px;
   border-radius: 20px;
-  text-align: center;
-  width: 80%;
-  max-width: 300px;
+  background: #ff5e78;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
 }
 
-/* MODAL */
+.hidden {
+  display: none;
+}
+
+#slideshow {
+  text-align: center;
+}
+
+#slideImage {
+  width: 80%;
+  border-radius: 16px;
+  margin-bottom: 10px;
+}
+
 .modal {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.5);
   justify-content: center;
   align-items: center;
 }
 
 .modal-content {
-  background: #ff5f9e;
-  padding: 28px;
-  border-radius: 25px;
+  background: white;
+  padding: 25px;
+  border-radius: 18px;
   text-align: center;
+  width: 90%;
+  max-width: 360px;
+}
+
+.teddy-img {
+  width: 130px;
+  margin-bottom: 10px;
+  animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
 }

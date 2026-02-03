@@ -1,84 +1,99 @@
 /* =========================
-   BASIC SETUP
+   QUIZ DATA (YOUR OLD QUESTIONS)
 ========================= */
 
-const sections = document.querySelectorAll(".section");
-let current = 0;
-
-const popup = document.getElementById("popup");
-const popupText = document.getElementById("popupText");
-
-/* =========================
-   QUIZ REACTIONS
-========================= */
-
-const reactions = [
+const quizData = [
   {
-    right: "Okay wow 😳 how are you always this perfect, Ammu 💖",
-    wrong: "EXCUSE ME 😤 That answer hurt me emotionally… but okay I forgive you 🙄❤️"
+    question: "What is my favourite thing about you? 💕",
+    options: [
+      "Your smile 😍",
+      "Your boobies 😜",
+      "Your possesiveness 😆"
+    ],
+    correctIndex: 0
   },
   {
-    right: "YESSS 💕 You know me too well and it’s kinda scary 😳",
-    wrong: "Wrong 😤 I see… so you think I’m mysterious huh? Noted 🙄😂"
+    question: "What do I do when I miss you? 🥹",
+    options: [
+      "Act strong 😎",
+      "Overthink silently 🙃",
+      "Text you instantly 😌❤️"
+    ],
+    correctIndex: 2
   },
   {
-    right: "Correct 🥹 This answer was mandatory anyway 😌💘",
-    wrong: "HOW DARE YOU 😤 Wrong answer detected. Retrying life… just kidding 😂❤️"
+    question: "Who is officially my favourite person? 💖",
+    options: [
+      "You 😌❤️",
+      "Me 😎",
+      "Food 🍕"
+    ],
+    correctIndex: 0
   }
 ];
 
 /* =========================
-   SECTION NAVIGATION
+   QUIZ ELEMENTS
 ========================= */
 
-function nextSection() {
-  sections[current].classList.remove("active");
-  current++;
-  sections[current].classList.add("active");
+let currentQuestion = 0;
+
+const quizBox = document.getElementById("quizBox");
+const questionEl = document.getElementById("question");
+const optionsBox = document.getElementById("options");
+
+/* =========================
+   LOAD QUESTION
+========================= */
+
+function loadQuestion() {
+  const q = quizData[currentQuestion];
+  questionEl.innerText = q.question;
+  optionsBox.innerHTML = "";
+
+  q.options.forEach((option, index) => {
+    const btn = document.createElement("button");
+    btn.innerText = option;
+    btn.onclick = () => handleAnswer(index === q.correctIndex);
+    optionsBox.appendChild(btn);
+  });
 }
 
 /* =========================
-   QUIZ ANSWER HANDLER
+   HANDLE ANSWER
 ========================= */
 
-function answer(isRight, index) {
-  popupText.innerText = isRight
-    ? reactions[index].right
-    : reactions[index].wrong;
+function handleAnswer(isCorrect) {
+  if (isCorrect) {
+    alert("Correct 😘 you really know me too well!");
+  } else {
+    alert("Wrong 😤 hmm… still cute though 😂❤️");
+  }
 
-  popup.style.display = "flex";
-}
+  currentQuestion++;
 
-function closePopup() {
-  popup.style.display = "none";
-  nextSection();
+  if (currentQuestion < quizData.length) {
+    loadQuestion();
+  } else {
+    quizBox.classList.add("hidden");
+    document.getElementById("slideshow").classList.remove("hidden");
+
+    const music = document.getElementById("bgMusic");
+    if (music) music.play().catch(() => {});
+  }
 }
 
 /* =========================
-   SHOW PROPOSAL MODAL (FIX)
+   START QUIZ
 ========================= */
 
-function showModal() {
-  document.getElementById("proposalModal").style.display = "flex";
-}
-
-/* =========================
-   NO BUTTON RUNAWAY
-========================= */
-
-const noBtn = document.getElementById("noBtn");
-
-noBtn.addEventListener("mouseover", () => {
-  noBtn.style.position = "absolute";
-  noBtn.style.top = Math.random() * 80 + "%";
-  noBtn.style.left = Math.random() * 80 + "%";
-});
+loadQuestion();
 
 /* =========================
    SLIDESHOW
 ========================= */
 
-const photos = [
+const images = [
   "images/photo1.jpg",
   "images/photo2.jpg",
   "images/photo3.jpg",
@@ -87,44 +102,26 @@ const photos = [
   "images/photo6.jpg"
 ];
 
-let photoIndex = 0;
-const slideImg = document.getElementById("slideshow");
+let imgIndex = 0;
+const slideImg = document.getElementById("slideImage");
 
 setInterval(() => {
-  if (!slideImg) return;
-
-  photoIndex = (photoIndex + 1) % photos.length;
-  slideImg.style.opacity = 0;
-
-  setTimeout(() => {
-    slideImg.src = photos[photoIndex];
-    slideImg.style.opacity = 1;
-  }, 400);
+  imgIndex = (imgIndex + 1) % images.length;
+  slideImg.src = images[imgIndex];
 }, 2500);
 
 /* =========================
-   MUSIC AUTOPLAY
+   YES / NO BUTTONS
 ========================= */
 
-const music = document.getElementById("bgMusic");
+function yesClicked() {
+  document.getElementById("choiceButtons").style.display = "none";
+  document.getElementById("proposalModal").style.display = "flex";
+}
 
-document.addEventListener(
-  "click",
-  () => {
-    if (music && music.paused) {
-      music.play().catch(() => {});
-    }
-  },
-  { once: true }
-);
-
-/* =========================
-   ACCEPTANCE MESSAGE
-========================= */
-
-function accepted() {
-  document.getElementById("finalMessage").innerHTML =
-    "YAAAYYY 🥹💖<br><br>" +
-    "Ammu, you just made my heart the happiest ever 💕<br>" +
-    "Unlimited love, silly fights, and forever starts now 😌❤️";
+function noClicked() {
+  const btn = document.getElementById("noBtn");
+  btn.style.position = "absolute";
+  btn.style.left = Math.random() * 80 + "%";
+  btn.style.top = Math.random() * 80 + "%";
 }

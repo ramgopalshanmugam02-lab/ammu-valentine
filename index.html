@@ -1,76 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>For Ammu 💖</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ammu ❤️</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<audio id="bgMusic" loop>
-  <source src="music/love.mp3" type="audio/mpeg">
-</audio>
+<!-- QUIZ -->
+<div id="quizBox" class="card">
+  <h2 id="question">Question</h2>
+  <div id="options"></div>
+</div>
 
-<!-- POPUP MESSAGE -->
-<div class="popup" id="popup">
-  <div class="popup-box">
-    <p id="popupText"></p>
-    <button onclick="closePopup()">OK 💕</button>
+<!-- SLIDESHOW -->
+<div id="slideshow" class="hidden">
+  <img id="slideImage" src="images/photo1.jpg">
+  <p class="cute-text">Every moment with you feels like magic ✨</p>
+
+  <div id="choiceButtons">
+    <button onclick="yesClicked()">YES 💖</button>
+    <button id="noBtn" onclick="noClicked()">NO 😈</button>
   </div>
 </div>
 
-<!-- QUIZ INTRO -->
-<section class="section active">
-  <h1>Ammu 💖</h1>
-  <p>Before I ask you something important…</p>
-  <p>Let’s play a tiny game 😌</p>
-  <button onclick="nextSection()">Start 💕</button>
-</section>
-
-<!-- QUESTION 1 -->
-<section class="section">
-  <h2>What is my favourite thing about you? 💕</h2>
-  <button onclick="answer(true, 0)">Your love & affection 😍</button>
-  <button onclick="answer(false, 0)">Your boobies 😜</button>
-  <button onclick="answer(false, 0)">Your possesiveness 😆</button>
-</section>
-
-<!-- QUESTION 2 -->
-<section class="section">
-  <h2>What do I do when I miss you? 🥹</h2>
-  <button onclick="answer(false, 1)">Act strong 😎</button>
-  <button onclick="answer(false, 1)">Overthink silently 🙃</button>
-  <button onclick="answer(true, 1)">Text you instantly 😌❤️</button>
-</section>
-
-<!-- QUESTION 3 -->
-<section class="section">
-  <h2>Who is officially my favourite person? 💖</h2>
-  <button onclick="answer(true, 2)">You 😌❤️</button>
-  <button onclick="answer(false, 2)">Me 😎</button>
-  <button onclick="answer(false, 2)">Food 🍕</button>
-</section>
-
-<!-- SLIDESHOW PAGE -->
-<section class="section">
-  <img id="slideshow" src="images/photo1.jpg" class="photo">
-  <p>You’ve always been my favourite story 💕</p>
-  <button onclick="showModal()">One last question… 💘</button>
-</section>
-
-<!-- PROPOSAL MODAL -->
-<div class="modal" id="proposalModal">
+<!-- FINAL MODAL -->
+<div id="proposalModal" class="modal">
   <div class="modal-content">
-    <h2>Will you be my Valentine, Ammu? 💖</h2>
-    <div class="buttons">
-      <button onclick="accepted()">YES 💕</button>
-      <button id="noBtn">NO 🙈</button>
-    </div>
-    <p id="finalMessage" class="final-text"></p>
+    <img src="images/teddy.png" class="teddy-img" alt="Teddy Love">
+    <h2>Ammu 🥹❤️</h2>
+    <p>
+      You make my days brighter, my heart calmer and my life happier.  
+      Will you be my Valentine? 💘
+    </p>
   </div>
 </div>
 
-<script src="script.js?v=2"></script>
+<audio id="bgMusic" src="music/love.mp3"></audio>
+
+<script src="script.js?v=5"></script>
 </body>
 </html>
