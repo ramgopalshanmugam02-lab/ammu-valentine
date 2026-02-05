@@ -1,16 +1,17 @@
-# Hey Ammu ❤️
+---
+title: For Ammu ❤️
+redirect_to: https://ramgopalshanmugam02-lab.github.io/ammu-valentine/
+---
 
-I made something small for you.  
-Not big. Not perfect.  
-But made with a lot of thought, effort, and love.
+# Hey Ammu 💖
 
-Before you click the link below,  
-just know this — every smile, every silly moment, every memory…  
-this is all about **us**.
+Before you click anything…
 
-Take a deep breath 😌  
-and tap this when you’re ready 💖
+I just want you to know  
+this isn’t a website,  
+it’s a little piece of my heart in pixels 🧸✨
 
-👉 **[Click here for your surprise 🧸✨](https://ramgopalshanmugam02-lab.github.io/ammu-valentine/)**
+Whenever you’re ready,  
+tap below and let me take you on a tiny love ride 😌❤️
 
-(Headphones recommended 🎧❤️)
+👉 **Click here 💕**
