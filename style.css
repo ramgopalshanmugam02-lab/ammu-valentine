@@ -7,20 +7,29 @@ body {
 
 .section {
   display: none;
-  padding: 40px 20px;
+  min-height: 100vh;
+  padding: 60px 20px;
+  box-sizing: border-box;
 }
 
 .section.active {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-h2 {
+h1, h2 {
   color: #7b0033;
 }
 
+p {
+  font-size: 18px;
+}
+
 button {
-  padding: 12px 18px;
-  margin: 10px;
+  padding: 12px 22px;
+  margin: 12px;
   border-radius: 25px;
   border: none;
   background: #ff4d6d;
@@ -34,7 +43,7 @@ button:hover {
 }
 
 #slideshow img {
-  width: 80%;
+  width: 85%;
   max-width: 320px;
   border-radius: 20px;
   animation: fade 1s;
@@ -62,6 +71,7 @@ button:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 }
 
 #popup.hidden {
@@ -79,4 +89,10 @@ button:hover {
   border-radius: 15px;
   max-width: 320px;
   white-space: pre-line;
+}
+
+@media (min-width: 768px) {
+  p { font-size: 20px; }
+  button { font-size: 18px; }
+  #slideshow img { max-width: 380px; }
 }

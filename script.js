@@ -7,7 +7,11 @@ const quizData = [
       { text: "Your love 😍", correct: true },
       { text: "Your boobies 😜", correct: false },
       { text: "Your possessiveness 😆", correct: false }
-    ]
+    ],
+    reactions: {
+      correct: "Of course 😍 that smile is my weakness!",
+      wrong: "Oiii 😤 look properly… the smile wins always!"
+    }
   },
   {
     q: "What do I do when I miss you? 🥹",
@@ -15,7 +19,11 @@ const quizData = [
       { text: "Act strong 😎", correct: false },
       { text: "Overthink silently 🙃", correct: false },
       { text: "Text you instantly 😌❤️", correct: true }
-    ]
+    ],
+    reactions: {
+      correct: "Yes 😌❤️ I literally run to my phone!",
+      wrong: "Haha nope 😜 I can’t survive without texting you."
+    }
   },
   {
     q: "Who is officially my favourite person? 💖",
@@ -23,7 +31,11 @@ const quizData = [
       { text: "You 😌❤️", correct: true },
       { text: "Me 😎", correct: false },
       { text: "Food 🍕", correct: false }
-    ]
+    ],
+    reactions: {
+      correct: "Obviously YOU 🥺❤️ no competition!",
+      wrong: "Excuse meee 😤 there’s only one right answer!"
+    }
   }
 ];
 
@@ -31,12 +43,13 @@ let currentQ = 0;
 
 /* ================= ELEMENTS ================= */
 
+const intro = document.getElementById("intro");
 const quiz = document.getElementById("quiz");
-const questionEl = document.getElementById("question");
-const optionsEl = document.getElementById("options");
-
 const slideshow = document.getElementById("slideshow");
 const proposal = document.getElementById("proposal");
+
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
 
 const popup = document.getElementById("popup");
 const popupText = document.getElementById("popupText");
@@ -44,13 +57,24 @@ const popupTeddy = document.getElementById("popupTeddy");
 
 const music = document.getElementById("bgMusic");
 
+/* ================= INTRO ================= */
+
+document.getElementById("startBtn").onclick = () => {
+  intro.classList.remove("active");
+  quiz.classList.add("active");
+  music.volume = 0.6;
+  music.play().catch(() => {});
+  loadQuestion();
+};
+
 /* ================= QUIZ ================= */
 
 function loadQuestion() {
-  questionEl.textContent = quizData[currentQ].q;
+  const q = quizData[currentQ];
+  questionEl.textContent = q.q;
   optionsEl.innerHTML = "";
 
-  quizData[currentQ].options.forEach(opt => {
+  q.options.forEach(opt => {
     const btn = document.createElement("button");
     btn.textContent = opt.text;
     btn.onclick = () => handleAnswer(opt.correct);
@@ -59,11 +83,11 @@ function loadQuestion() {
 }
 
 function handleAnswer(correct) {
-  if (correct) {
-    showPopup("Correct 😘 You really know me too well!");
-  } else {
-    showPopup("Wrong 😤 Oiii Ammu! Think properly!");
-  }
+  const reaction = correct
+    ? quizData[currentQ].reactions.correct
+    : quizData[currentQ].reactions.wrong;
+
+  showPopup(reaction);
 
   currentQ++;
 
@@ -90,7 +114,7 @@ function closePopup() {
   popup.classList.add("hidden");
 }
 
-/* ================= SLIDESHOW + MUSIC ================= */
+/* ================= SLIDESHOW ================= */
 
 const photos = [
   "images/photo1.jpg",
@@ -106,9 +130,6 @@ let slideIndex = 0;
 function startSlideshow() {
   quiz.classList.remove("active");
   slideshow.classList.add("active");
-
-  music.volume = 0.6;
-  music.play().catch(() => {});
 
   setInterval(() => {
     slideIndex = (slideIndex + 1) % photos.length;
@@ -132,13 +153,8 @@ noBtn.onmouseover = () => {
 
 document.getElementById("yesBtn").onclick = () => {
   document.querySelector(".btn-group").style.display = "none";
-
   showPopup(
     "Ammu 🧸❤️\n\nYou just made my heart the happiest.\nEvery smile, every fight, every silly moment — I want all of it with you.\n\nWill you be mine… today and always? 💖",
     true
   );
 };
-
-/* ================= START ================= */
-
-loadQuestion();
