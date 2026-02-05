@@ -1,66 +1,82 @@
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #ffafbd, #ffc3a0);
   margin: 0;
-  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(#ffb6c1, #ffc0cb);
   text-align: center;
 }
 
-.card {
-  background: white;
-  margin: 60px auto;
-  padding: 30px;
-  width: 90%;
-  max-width: 420px;
-  border-radius: 25px;
+.section {
+  display: none;
+  padding: 40px 20px;
+}
+
+.section.active {
+  display: block;
+}
+
+h2 {
+  color: #7b0033;
 }
 
 button {
-  background: #ff5e7e;
-  border: none;
-  color: white;
   padding: 12px 18px;
   margin: 10px;
-  border-radius: 20px;
+  border-radius: 25px;
+  border: none;
+  background: #ff4d6d;
+  color: white;
   font-size: 16px;
   cursor: pointer;
 }
 
 button:hover {
-  transform: scale(1.05);
+  background: #ff1f4d;
 }
 
-.hidden {
+#slideshow img {
+  width: 80%;
+  max-width: 320px;
+  border-radius: 20px;
+  animation: fade 1s;
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.btn-group {
+  position: relative;
+  height: 120px;
+}
+
+#noBtn {
+  position: absolute;
+}
+
+#popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#popup.hidden {
   display: none;
 }
 
-.heart-gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.heart-gallery img {
+#popup img {
   width: 120px;
-  height: 120px;
-  object-fit: cover;
-  margin: 5px;
-  border-radius: 20px;
-}
-
-.popup {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #ffe6ee;
-  padding: 20px;
-  border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-  z-index: 999;
-}
-
-.popup-img {
-  width: 80px;
   margin-bottom: 10px;
+}
+
+#popup p {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 320px;
+  white-space: pre-line;
 }

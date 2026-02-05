@@ -1,99 +1,144 @@
-/* ===== QUIZ DATA ===== */
+/* ================= QUIZ DATA ================= */
 
 const quizData = [
   {
     q: "What is my favourite thing about you? 💕",
     options: [
-      "Your love 😍",
-      "Your boobies 😜",
-      "Your possesiveness 😆"
-    ],
-    correctIndex: 0
+      { text: "Your love 😍", correct: true },
+      { text: "Your boobies 😜", correct: false },
+      { text: "Your possessiveness 😆", correct: false }
+    ]
   },
   {
     q: "What do I do when I miss you? 🥹",
     options: [
-      "Act strong 😎",
-      "Overthink silently 🙃",
-      "Text you instantly 😌❤️"
-    ],
-    correctIndex: 2
+      { text: "Act strong 😎", correct: false },
+      { text: "Overthink silently 🙃", correct: false },
+      { text: "Text you instantly 😌❤️", correct: true }
+    ]
   },
   {
     q: "Who is officially my favourite person? 💖",
     options: [
-      "You 😌❤️",
-      "Me 😎",
-      "Food 🍕"
-    ],
-    correctIndex: 0
+      { text: "You 😌❤️", correct: true },
+      { text: "Me 😎", correct: false },
+      { text: "Food 🍕", correct: false }
+    ]
   }
 ];
 
-let currentQuestion = 0;
+let currentQ = 0;
 
-const quizBox = document.getElementById("quizBox");
+/* ================= ELEMENTS ================= */
+
+const quiz = document.getElementById("quiz");
 const questionEl = document.getElementById("question");
-const optionsBox = document.getElementById("options");
+const optionsEl = document.getElementById("options");
+
+const slideshow = document.getElementById("slideshow");
+const proposal = document.getElementById("proposal");
+
 const popup = document.getElementById("popup");
 const popupText = document.getElementById("popupText");
+const popupTeddy = document.getElementById("popupTeddy");
+
 const music = document.getElementById("bgMusic");
 
-/* ===== LOAD QUESTION ===== */
+/* ================= QUIZ ================= */
 
 function loadQuestion() {
-  const q = quizData[currentQuestion];
-  questionEl.innerText = q.q;
-  optionsBox.innerHTML = "";
+  questionEl.textContent = quizData[currentQ].q;
+  optionsEl.innerHTML = "";
 
-  q.options.forEach((opt, index) => {
+  quizData[currentQ].options.forEach(opt => {
     const btn = document.createElement("button");
-    btn.innerText = opt;
-    btn.onclick = () => handleAnswer(index === q.correctIndex);
-    optionsBox.appendChild(btn);
+    btn.textContent = opt.text;
+    btn.onclick = () => handleAnswer(opt.correct);
+    optionsEl.appendChild(btn);
   });
 }
 
-/* ===== POPUP ===== */
-
-function showPopup(text) {
-  popupText.innerText = text;
-  popup.classList.remove("hidden");
-  setTimeout(() => popup.classList.add("hidden"), 1500);
-}
-
-/* ===== HANDLE ANSWER ===== */
-
 function handleAnswer(correct) {
   if (correct) {
-    showPopup("Correct 😘 you really know me too well!");
+    showPopup("Correct 😘 You really know me too well!");
   } else {
-    showPopup("Wrong 😤 extra cuddles punishment 😂❤️");
+    showPopup("Wrong 😤 Oiii Ammu! Think properly!");
   }
 
-  setTimeout(() => {
-    currentQuestion++;
-    if (currentQuestion < quizData.length) {
-      loadQuestion();
-    } else {
-      quizBox.classList.add("hidden");
-      document.getElementById("slideshow").classList.remove("hidden");
-      music.play().catch(() => {});
-    }
-  }, 1600);
+  currentQ++;
+
+  if (currentQ < quizData.length) {
+    setTimeout(loadQuestion, 1600);
+  } else {
+    setTimeout(startSlideshow, 1600);
+  }
 }
 
-/* ===== YES / NO ===== */
+/* ================= POPUP ================= */
+
+function showPopup(text, final = false) {
+  popupText.textContent = text;
+  popupTeddy.style.display = final ? "block" : "none";
+  popup.classList.remove("hidden");
+
+  if (!final) {
+    setTimeout(closePopup, 1500);
+  }
+}
+
+function closePopup() {
+  popup.classList.add("hidden");
+}
+
+/* ================= SLIDESHOW + MUSIC ================= */
+
+const photos = [
+  "images/photo1.jpg",
+  "images/photo2.jpg",
+  "images/photo3.jpg",
+  "images/photo4.jpg",
+  "images/photo5.jpg",
+  "images/photo6.jpg"
+];
+
+let slideIndex = 0;
+
+function startSlideshow() {
+  quiz.classList.remove("active");
+  slideshow.classList.add("active");
+
+  music.volume = 0.6;
+  music.play().catch(() => {});
+
+  setInterval(() => {
+    slideIndex = (slideIndex + 1) % photos.length;
+    document.getElementById("slide").src = photos[slideIndex];
+  }, 2500);
+
+  setTimeout(() => {
+    slideshow.classList.remove("active");
+    proposal.classList.add("active");
+  }, 14000);
+}
+
+/* ================= YES / NO ================= */
+
+const noBtn = document.getElementById("noBtn");
+
+noBtn.onmouseover = () => {
+  noBtn.style.left = Math.random() * 200 + "px";
+  noBtn.style.top = Math.random() * 80 + "px";
+};
 
 document.getElementById("yesBtn").onclick = () => {
-  showPopup("YAYYY 🧸💖 I knew it!!");
-  document.querySelector(".btn-group").classList.add("hidden");
+  document.querySelector(".btn-group").style.display = "none";
+
+  showPopup(
+    "Ammu 🧸❤️\n\nYou just made my heart the happiest.\nEvery smile, every fight, every silly moment — I want all of it with you.\n\nWill you be mine… today and always? 💖",
+    true
+  );
 };
 
-document.getElementById("noBtn").onclick = () => {
-  showPopup("NO is not an option 😏💕");
-};
-
-/* ===== START ===== */
+/* ================= START ================= */
 
 loadQuestion();
